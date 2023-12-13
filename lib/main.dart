@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   //Create new Item
   Future<void> _createItem(Map<String, dynamic> newItem) async {
     await _servicesBox.add(newItem);
-    print("amount data is ${_servicesBox.length}");
+    _refreshItems();
   } 
 
   void _showForm(BuildContext ctx, int? itemKey) async {
