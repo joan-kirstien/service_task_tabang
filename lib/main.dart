@@ -54,6 +54,12 @@ class _HomePageState extends State<HomePage> {
   final List<Map<String, dynamic>> _items = [];
 
   final _servicesBox = Hive.box('services_box');
+  void _refreshItems() {
+    final data = _servicesBox.keys.map((key){
+      final item =  _servicesBox.get(key);
+      return{"key": key, "name": item["name"], "phone number": item['phone number'], "email": item["email"], "password": item["password"], "services": item["services"], "ratings": item['rating']};
+    }).toList();
+  }
 
   //Create new Item
   Future<void> _createItem(Map<String, dynamic> newItem) async {
