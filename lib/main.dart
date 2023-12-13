@@ -51,15 +51,15 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _servicesController = TextEditingController();
   final TextEditingController _ratingsController = TextEditingController();
 
-  List<Map<String, dynamic>> _items = [];
+  final List<Map<String, dynamic>> _items = [];
 
   final _servicesBox = Hive.box('services_box');
 
   //Create new Item
   Future<void> _createItem(Map<String, dynamic> newItem) async {
     await _servicesBox.add(newItem);
-
-  }
+    print("amount data is ${_servicesBox.length}");
+  } 
 
   void _showForm(BuildContext ctx, int? itemKey) async {
     //CHECK THIS PART FOR ERRORS
