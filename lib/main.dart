@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
@@ -8,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized ();
 
   await Hive.initFlutter();
-  await Hive.openBox('services');
+  await Hive.openBox('services_box');
 
   runApp(const MyApp());
 
@@ -44,12 +43,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _servicesController = TextEditingController();
   final TextEditingController _ratingsController = TextEditingController();
+
+  //Create new Item
+  Future<void> _createItem(Map<String, dynamic> newItem) async {
+    await servicesBox.add(newItem);
+
+  }
 
   void _showForm(BuildContext ctx, int? itemKey) async {
     //CHECK THIS PART FOR ERRORS
@@ -116,7 +122,14 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
               onPressed: () async {
-
+                _createItem({
+                  "name": _nameController.text,
+                  "phone number": _phoneNumberController.text,
+                  "email": _emailController.text,
+                  "password": _passwordController.text,
+                  "services": _servicesController.text,
+                  "ratings": _ratingsController.text,
+                });
                 //Clear the text fields
                 _nameController.text = '';
                 _phoneNumberController.text = '';
@@ -127,7 +140,7 @@ class _HomePageState extends State<HomePage> {
 
                 Navigator.of(context).pop(); //Close the bottom sheet
               }, 
-              child: Text( 'Create New'),
+              child: const Text( 'Create New'),
             ),
             const SizedBox(
               height: 15,
