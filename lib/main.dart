@@ -129,6 +129,9 @@ class _HomePageState extends State<HomePage> {
               }, 
               child: Text( 'Create New'),
             ),
+            const SizedBox(
+              height: 15,
+            )
           ],
         )
       )
@@ -144,7 +147,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('TABANG'),
       ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => null,
+          onPressed: () => _showForm(context, null),
           child: const Icon(Icons.add),
       )
    );
