@@ -51,9 +51,13 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _servicesController = TextEditingController();
   final TextEditingController _ratingsController = TextEditingController();
 
+  List<Map<String, dynamic>> _items = [];
+
+  final _servicesBox = Hive.box('services_box');
+
   //Create new Item
   Future<void> _createItem(Map<String, dynamic> newItem) async {
-    await servicesBox.add(newItem);
+    await _servicesBox.add(newItem);
 
   }
 
