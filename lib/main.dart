@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _servicesController = TextEditingController();
   final TextEditingController _ratingsController = TextEditingController();
 
-  final List<Map<String, dynamic>> _items = [];
+   List<Map<String, dynamic>> _items = [];
 
   final _servicesBox = Hive.box('services_box');
   void _refreshItems() {
@@ -59,6 +59,11 @@ class _HomePageState extends State<HomePage> {
       final item =  _servicesBox.get(key);
       return{"key": key, "name": item["name"], "phone number": item['phone number'], "email": item["email"], "password": item["password"], "services": item["services"], "ratings": item['rating']};
     }).toList();
+
+    setState(() {
+      _items = data.reversed.toList();
+      print(_items.length);
+    });
   }
 
   //Create new Item
